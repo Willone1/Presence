@@ -1,0 +1,318 @@
+{
+  "name": "presence-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
+    "@radix-ui/react-accordion": "^1.2.10",
+    "@radix-ui/react-alert-dialog": "^1.1.13",
+    "@radix-ui/react-aspect-ratio": "^1.1.6",
+    "@radix-ui/react-avatar": "^1.1.9",
+    "@radix-ui/react-checkbox": "^1.3.1",
+    "@radix-ui/react-collapsible": "^1.1.10",
+    "@radix-ui/react-context-menu": "^2.2.14",
+    "@radix-ui/react-dialog": "^1.1.13",
+    "@radix-ui/react-dropdown-menu": "^2.1.14",
+    "@radix-ui/react-hover-card": "^1.1.13",
+    "@radix-ui/react-label": "^2.1.6",
+    "@radix-ui/react-menubar": "^1.1.14",
+    "@radix-ui/react-navigation-menu": "^1.2.12",
+    "@radix-ui/react-popover": "^1.1.13",
+    "@radix-ui/react-progress": "^1.1.6",
+    "@radix-ui/react-radio-group": "^1.3.6",
+    "@radix-ui/react-scroll-area": "^1.2.8",
+    "@radix-ui/react-select": "^2.2.4",
+    "@radix-ui/react-separator": "^1.1.6",
+    "@radix-ui/react-slider": "^1.3.4",
+    "@radix-ui/react-slot": "^1.2.2",
+    "@radix-ui/react-switch": "^1.2.4",
+    "@radix-ui/react-tabs": "^1.1.11",
+    "@radix-ui/react-toggle": "^1.1.8",
+    "@radix-ui/react-toggle-group": "^1.1.9",
+    "@radix-ui/react-tooltip": "^1.2.6",
+    "@types/request": "^2.48.12",
+    "@worldcoin/mini-apps-ui-kit-react": "1.2.4",
+    "@worldcoin/minikit-js": "1.9.6",
+    "@worldcoin/minikit-react": "1.9.7",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^3.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "framer-motion": "^12.12.1",
+    "input-otp": "^1.4.2",
+    "lucide-react": "^0.511.0",
+    "next": "14.2.17",
+    "next-themes": "^0.4.6",
+    "react": "^18",
+    "react-day-picker": "^8.10.1",
+    "react-dom": "^18",
+    "react-hook-form": "^7.56.3",
+    "react-resizable-panels": "^3.0.2",
+    "tailwind-merge": "^3.3.0",
+    "tailwindcss-animate": "^1.0.7",
+    "vaul": "^1.1.2",
+    "zod": "^3.24.4"
+  },
+  "devDependencies": {
+    "@types/node": "20.17.47",
+    "@types/react": "18.3.21",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.8.3"
+  }
+}
+2. src/app/layout.tsx
+import '@worldcoin/mini-apps-ui-kit-react/styles.css';
+import './globals.css';
+import MiniKitProvider from '../components/MiniKitProvider';
+
+export const metadata = {
+  title: 'Presence',
+  description: 'Presence - Earn tokens for mindful digital detox time',
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sora:wght@600&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
+        <MiniKitProvider>
+          <main>{children}</main>
+        </MiniKitProvider>
+      </body>
+    </html>
+  );
+}
+3. src/app/globals.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital@0;1&family=Rubik:ital,wght@0,300..900;1,300..900&family=Sora:wght@100..800&display=swap");
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --font-sans: 'Rubik', sans-serif;
+    --font-display: 'Sora', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+4. src/components/MiniKitProvider.tsx
+'use client'
+
+import { ReactNode, useEffect, useState } from 'react'
+import { MiniKit } from '@worldcoin/minikit-js'
+
+interface MiniKitProviderProps {
+  children: ReactNode;
+}
+
+export default function MiniKitProvider({ children }: MiniKitProviderProps) {
+  const [isInstalled, setIsInstalled] = useState<boolean>(false);
+  
+  useEffect(() => {
+    const appId = 'app_presence_zen_mindfulness';
+    
+    try {
+      MiniKit.install(appId);
+      setIsInstalled(MiniKit.isInstalled());
+    } catch (error) {
+      console.error('Failed to install MiniKit:', error);
+      setIsInstalled(false);
+    }
+  }, []);
+  
+  return (
+    <div data-minikit-installed={isInstalled}>
+      {children}
+    </div>
+  );
+}
+5. src/app/api/nonce/route.ts
+import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
+
+export const dynamic = 'force-dynamic'
+
+export async function GET(req: NextRequest): Promise<NextResponse> {
+  try {
+    // Generate a secure nonce (at least 8 alphanumeric characters)
+    const nonce = crypto.randomUUID().replace(/-/g, '')
+
+    // Store the nonce in a secure cookie
+    const cookieStore = await cookies()
+    cookieStore.set('siwe', nonce, { 
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+      maxAge: 60 * 60 // 1 hour
+    })
+
+    return NextResponse.json({ nonce })
+  } catch (error) {
+    console.error('Error generating nonce:', error)
+    return NextResponse.json(
+      { error: 'Failed to generate nonce' },
+      { status: 500 }
+    )
+  }
+}
+6. src/app/api/complete-siwe/route.ts
+import { cookies } from 'next/headers'
+import { NextRequest, NextResponse } from 'next/server'
+import { MiniAppWalletAuthSuccessPayload, verifySiweMessage } from '@worldcoin/minikit-js'
+
+export const dynamic = 'force-dynamic'
+
+interface RequestPayload {
+  payload: MiniAppWalletAuthSuccessPayload
+  nonce: string
+}
+
+export async function POST(req: NextRequest): Promise<NextResponse> {
+  try {
+    const { payload, nonce } = (await req.json()) as RequestPayload
+    
+    // Get the stored nonce from cookies
+    const cookieStore = await cookies()
+    const storedNonce = cookieStore.get('siwe')?.value
+
+    // Verify the nonce matches
+    if (nonce !== storedNonce) {
+      return NextResponse.json({
+        status: 'error',
+        isValid: false,
+        message: 'Invalid nonce'
+      }, { status: 400 })
+    }
+
+    // Verify the SIWE message signature
+    const validMessage = await verifySiweMessage(payload, nonce)
+    
+    if (validMessage.isValid) {
+      // Clear the nonce after successful verification
+      cookieStore.delete('siwe')
+      
+      return NextResponse.json({
+        status: 'success',
+        isValid: true,
+        address: payload.address
+      })
+    } else {
+      return NextResponse.json({
+        status: 'error',
+        isValid: false,
+        message: 'Invalid signature'
+      }, { status: 400 })
+    }
+  } catch (error: any) {
+    console.error('Error verifying SIWE message:', error)
+    return NextResponse.json({
+      status: 'error',
+      isValid: false,
+      message: error.message || 'Verification failed'
+    }, { status: 500 })
+  }
+}
